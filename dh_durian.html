@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>내 두리안 QR 스캔하기</title>
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
+    .container { max-width: 400px; margin: 40px auto; background: #fff; border-radius: 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 28px 18px; text-align: center; }
+    h1 { font-size: 1.3rem; color: #1e293b; margin-bottom: 18px; }
+    #qr-btn { background: #10b981; color: #fff; font-weight: 700; border: none; border-radius: 12px; padding: 16px 0; width: 100%; font-size: 1.1rem; cursor: pointer; margin-bottom: 18px; transition: background 0.2s; }
+    #qr-btn:active { background: #059669; }
+    #reader { margin: 0 auto; max-width: 320px; }
+    #status { margin-top: 12px; color: #64748b; font-size: 0.98rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>내 두리안 QR 스캔하기</h1>
+    <button id="qr-btn">QR 코드 스캔 시작</button>
+    <div id="reader" style="display:none;"></div>
+    <div id="status"></div>
+  </div>
+  <script>
+    const qrBtn = document.getElementById('qr-btn');
+    const readerDiv = document.getElementById('reader');
+    const statusDiv = document.getElementById('status');
+    let html5QrCode;
+    let scanning = false;
+
+    qrBtn.onclick = function() {
+      if (scanning) return;
+      readerDiv.style.display = 'block';
+      statusDiv.textContent = '카메라를 허용하고 QR코드를 비춰주세요.';
+      qrBtn.disabled = true;
+      scanning = true;
+      html5QrCode = new Html5Qrcode("reader");
+      html5QrCode.start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: 220 },
+        qrCodeMessage => {
+          // QR코드 인식 시 바로 이동
+          window.location.href = "https://orrynara.github.io/okx_p2p_guide/durian_thawing_calculator_450_V2.html";
+        },
+        errorMessage => {
+          // 인식 실패시 무시 (계속 스캔)
+        }
+      ).catch(err => {
+        statusDiv.textContent = '카메라 접근이 거부되었거나 지원되지 않습니다.';
+        qrBtn.disabled = false;
+        scanning = false;
+      });
+    };
+  </script>
+</body>
+</html>
