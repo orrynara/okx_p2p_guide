@@ -121,7 +121,7 @@
       <!-- Result Display -->
       <div id="result" class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3" style="display:none;">
         <div class="result-item" id="result-method"><span id="result-method-label">선택된 해동 방법:</span> <span id="methodResult" class="result-value"></span></div>
-        <div class="result-item" id="result-time"><span id="result-time-label">예상 해동 시간:</span> <span id="timeResult" class="result-value"></span></div>
+  <div class="result-item" id="result-time"><span id="result-time-label" style="font-weight:800;">예상 해동 시간:</span> <span id="timeResult" class="result-value text-green-600" style="color:#10b981;font-weight:800;"></span></div>
         <div class="result-item" id="result-recommend"><span id="result-recommend-label">해동 후 권장 섭취 시간:</span> <span id="recommendResult" class="result-value"></span></div>
         <div id="waterInfo" class="text-sm text-blue-600 bg-blue-50 p-3 rounded-lg mt-2"></div>
       </div>
@@ -293,8 +293,9 @@
       document.getElementById('calculateBtn-text').textContent = t.calculateBtn;
       document.getElementById('disclaimer-text').textContent = t.disclaimer;
       document.getElementById('result-method-label').textContent = t.resultMethod;
-      document.getElementById('result-time-label').textContent = t.resultTime;
-      document.getElementById('result-recommend-label').textContent = t.resultRecommend;
+  document.getElementById('result-time-label').textContent = t.resultTime;
+  document.getElementById('result-time-label').style.fontWeight = '800';
+  document.getElementById('result-recommend-label').textContent = t.resultRecommend;
       const select = document.getElementById('envMethod');
       select.options[0].textContent = t.refrigeration;
       select.options[1].textContent = t.coldWater;
@@ -556,7 +557,9 @@
 
       const selectText = envMethodSelect.options[envMethodSelect.selectedIndex].textContent;
       document.getElementById('methodResult').textContent = selectText;
-      document.getElementById('timeResult').textContent = formatHours(thawTimeHours);
+  document.getElementById('timeResult').textContent = formatHours(thawTimeHours);
+  document.getElementById('timeResult').style.color = '#10b981';
+  document.getElementById('timeResult').style.fontWeight = '800';
 
       if (env_temp < 6) {
         document.getElementById('recommendResult').textContent = t.noRecommend;
